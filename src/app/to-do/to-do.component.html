@@ -1,0 +1,32 @@
+<div class="container">
+    <h1>To-Do List</h1>
+    <hr>
+    <form (ngSubmit)="onSubmit(formState)" #formState="ngForm">
+        <div class="text-field">
+            <label for="taskholder">Task</label><br>
+            <input type="text" placeholder="Enter task" ngModel name="taskk" required>
+        </div>
+        <p *ngIf="formState.invalid && formState.dirty">Required Section</p>
+        <div>
+            <button [disabled]="formState.invalid || !formState.dirty" type="submit">Add</button>
+        </div>
+    </form>
+    <hr class="bottom-hr">
+    <table class="table" *ngIf="taskArr.length>0">
+        <thead>
+            <tr class="table_head">
+                <th scope="col">Task</th>
+                <th scope="col">Completed</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody *ngIf=" taskArr.length > 0">
+            <tr class="table_head_content" *ngFor="let t of taskArr;index as i">
+                <td>{{ t.taskName }}</td>
+                <td><input type="checkbox" [checked]="t.isCompleted" (change)="onCheck(i)"></td>
+                <td><button class="delete" (click)="onDelete(i)">Delete</button></td>
+            </tr>
+        </tbody>
+        
+    </table>
+</div>
